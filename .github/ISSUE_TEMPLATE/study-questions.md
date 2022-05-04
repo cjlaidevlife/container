@@ -14,3 +14,6 @@ assignees: s716134
 ### 3. Current Behavior
 
 ### 4. Failure Information
+
+### 5. Environment
+![](https://img.shields.io/badge/windows11-professional-blue) ![](https://img.shields.io/badge/powershell-7.2.3-blue) ![](https://img.shields.io/badge/docker_desktop-4.7.1-blue)
