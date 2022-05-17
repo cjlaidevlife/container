@@ -4,3 +4,5 @@ LABEL linux=debian \
       app=web
 COPY ./index.html /usr/share/nginx/html/
 ADD ./nginx.conf /etc/nginx/nginx.conf
+ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-g", "daemon off;"]
