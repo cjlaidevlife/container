@@ -1,0 +1,32 @@
+ENV["LC_ALL"] = "zh_TW.UTF-8"
+Vagrant.require_version ">= 2.2.19"
+Vagrant.configure(2) do |config|
+  # 1. meta data 
+   config.vm.box = "generic/debian10"
+   config.vm.box_version = "4.0.2"
+   config.vm.define vm_name = 'jenkins-lab'
+
+   # 2. compute resource
+   config.vm.provider "hyperv" do |hyperv|
+     hyperv.cpus = 4
+     hyperv.memory = 2048
+   end
+
+   # 3. network resource
+   config.vm.network "private_network", ip: "172.168.10.10"
+   config.vm.network "forwarded_port", guest: 8080, host: 8081
+   config.vm.network "forwarded_port", guest: 50000, host: 50001
+
+   # 4. container resource
+   config.vm.provision "docker" do |docker|
+     docker.pull_images "registry.hub.docker.com/bitnami/jenkins:2.346.1-debian-11-r0"
+   end
+   config.vm.provision "file", source: "./docker-compose.yml", destination: "$HOME/jenkins/docker-compose.yml"
+   config.vm.provision "file", source: "./jenkins_home", destination: "$HOME/jenkins/jenkins_home"
+
+   # 5. configure
+   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+     sudo apt-get update
+   SHELL
+
+end

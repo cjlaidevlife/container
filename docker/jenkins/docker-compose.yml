@@ -1,10 +1,13 @@
-version: "3.9"
+version: '2'
 services:
-  jenkins: 
-    image: registry.hub.docker.com/jenkins/jenkins:2.358-jdk11
-    ports: 
-      - 8080:8080
-      - 50000:50000
+  jenkins:
+    image: registry.hub.docker.com/bitnami/jenkins:2.346.1-debian-11-r0
+    ports:
+      - '8080:8080'
+    environment:
+      - JENKINS_PASSWORD=bitnami
     volumes:
-      - "./jenkins_home:/var/jenkins_home"
-
+      - 'jenkins_data:/bitnami/jenkins'
+volumes:
+  jenkins_data:
+    driver: local

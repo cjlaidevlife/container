@@ -4,5 +4,5 @@ prepare lab for jenkins
 
 
 ```
-docker pull registry.hub.docker.com/jenkins/jenkins:2.358-jdk11
+docker pull registry.hub.docker.com/bitnami/jenkins:2.346.1-debian-11-r0
 ```
